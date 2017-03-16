@@ -1,0 +1,113 @@
+# Copyright (C) 2017 JetPack Contact Form Success Message
+# This file is distributed under the same license as the JetPack Contact Form Success Message package.
+msgid ""
+msgstr ""
+"Project-Id-Version: JetPack Contact Form Success Message 0.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jetpack-contact-"
+"form-success-message\n"
+"POT-Creation-Date: 2017-03-16 23:20:49+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: includes/class-jpcfsm-admin.php:51
+msgid "%s Settings"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:94
+msgid "Changes saved successfully!"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:134
+msgid "Format Message"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:137
+msgid "Format your message below"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:145
+msgid "Other Settings"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:150
+msgid ""
+"Display only this custom message upon form sent (this will exclude the post/"
+"page default content)"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:157 includes/class-jpcfsm-admin.php:161
+msgid "Save Changes"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:175
+msgid "Stay tuned to updates"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:176
+msgid ""
+"Join our mailing list today for more free and premium WordPress plugins!"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:178
+msgid "Email:"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:182
+msgid "Your name:"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:186
+msgid "Subscribe"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:190
+msgid "Are you looking for help?"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:191
+msgid "Don't worry, we got you covered:"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:192
+msgid "Go to plugin support forums on WordPress"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:193
+msgid "Browse our blog for tutorials"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:197
+msgid "Rate &amp; review this plugin? &#9733;&#9733;&#9733;&#9733;&#9733;"
+msgstr ""
+
+#: includes/class-jpcfsm-admin.php:198
+msgid "Follow @Samuel_Elh on Twitter"
+msgstr ""
+
+#. #-#-#-#-#  jpcfsm.pot (JetPack Contact Form Success Message 0.3)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: includes/class-jpcfsm.php:70
+msgid "JetPack Contact Form Success Message"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/jetpack-contact-form-success-message/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"JetPack Contact Form Success Message replaces the custom message showing "
+"after successfully submitting a contact form, with your custom message."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Samuel Elh"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://samelh.com"
+msgstr ""
