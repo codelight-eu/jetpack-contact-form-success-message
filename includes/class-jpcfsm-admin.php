@@ -11,7 +11,7 @@ class JPCFSMAdmin
         static $instance = null;
         
         if ( null === $instance ) {
-            $instance = new Self;
+            $instance = new JPCFSMAdmin;
             $instance->setup();
         }
         

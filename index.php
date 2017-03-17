@@ -4,7 +4,7 @@ Plugin Name: JetPack Contact Form Success Message
 Plugin URI: https://wordpress.org/plugins/jetpack-contact-form-success-message/
 Description: JetPack Contact Form Success Message replaces the custom message showing after successfully submitting a contact form, with your custom message.
 Author: Samuel Elh
-Version: 0.3
+Version: 0.4
 Author URI: https://samelh.com
 Text Domain: jpcfsm
 Donate link: https://go.samelh.com/buy-me-a-coffee
@@ -13,24 +13,6 @@ Donate link: https://go.samelh.com/buy-me-a-coffee
 // If this file is called directly, abort.
 if ( !defined( 'WPINC' ) || !defined( 'ABSPATH' ) ) {
     die;
-}
-
-// PHP requirements check
-if ( !version_compare( PHP_VERSION, '5.3', '>=' ) ) {
-    function jpcfsm_php_notice() {
-        print '<div class="error notice is-dismissible"><p>';
-        print 'JetPack Contact Form Success Message requires at least PHP 5.3. Please upgrade your PHP to start using this plugin.';
-        print '</p></div>';
-    }
-
-    if ( is_network_admin() ) {
-        add_action('network_admin_notices', 'jpcfsm_php_notice');
-    }
-
-    add_action('admin_notices', 'jpcfsm_php_notice');
-    
-    // bail
-    return;
 }
 
 if ( !defined('JPCFSM_FILE') ) {

@@ -3,7 +3,7 @@ Contributors: elhardoum
 Tags: jetpack, jet pack, message, contact form, contact, form, success, email
 Requires at least: 3.0.1
 Tested up to: 4.7.3
-Stable tag: 0.3
+Stable tag: 0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://samelh.com
@@ -47,6 +47,9 @@ Thank you!
 You must set a custom message in the plugin settings first in order for the plugin to use it to filter the default JetPack message.
 
 == Changelog ==
+= 0.4 =
+* Fixed self calls with new Self, which is supported in PHP >= 5.5 only
+* Removed PHP version check: the plugin should work with any version.
 
 = 0.3 =
 * See https://wordpress.org/support/topic/needs-an-update-16/

@@ -14,10 +14,6 @@ if ( $formatted ) {
     $settings['message'] = $formatted;
 }
 
-if ( $formatted ) {
-    $settings['message'] = $formatted;
-}
-
 if ( $filter_all ) {
     $settings['strip_content'] = true;
 }

@@ -8,7 +8,7 @@ class JPCFSM
         static $instance = null;
         
         if ( null === $instance ) {
-            $instance = new Self;
+            $instance = new JPCFSM;
             $instance->setup();
         }
         
