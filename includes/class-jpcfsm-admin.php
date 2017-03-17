@@ -25,7 +25,11 @@ class JPCFSMAdmin
         }
 
         $this->actions = array(
-            ($this->isNetworkActive() ? 'network_' : '') . 'admin_menu' => array( $this, 'pages' )
+            ($this->isNetworkActive() ? 'network_' : '') . 'admin_menu' => array( $this, 'pages' ),
+            ($this->isNetworkActive() ? 'network_admin_' : '') . 'plugin_action_links_' . JPCFSM_BASE => array(
+                $this, 'actionLinks'
+            ),
+            'admin_enqueue_scripts' => array( $this, 'scripts' )
         );
 
         foreach ( $this->actions as $tag => $callback ) {
@@ -97,112 +101,116 @@ class JPCFSMAdmin
     public function display()
     {
         global $current_user;
-        $jpcfsm = jp_cf_success_message();
 
+        wp_enqueue_style('jpcfsm');
         ?>
 
-        <style type="text/css">
-            @media screen and (min-width: 700px) {
-                .jpcfsm-cont {
-                    display: flex;
-                    justify-content: space-between;
-                    max-width: 100%;
-                }
-                .jpcfsm-left {
-                    margin-right: 2em;
-                    overflow: hidden;
-                }
-                .jpcfsm-right {
-                    max-width: 30%;
-                }
-            }
-        </style>
+        <div class="wrap">
 
-        <div class="wrap jpcfsm-cont">
+            <h2><?php echo JPCFSM_NAME; ?></h2>
 
-            <?php if ( $this->notices ) : ?>
-                <?php print $this->notices; ?>
-            <?php endif; ?>
+            <div class="jpcfsm-cont">
 
-            <div class="jpcfsm-left">
+                <?php if ( $this->notices ) : ?>
+                    <?php print $this->notices; ?>
+                <?php endif; ?>
 
-                <form method="post" id="poststuff" class="gc-settings">
-                    <div id="postbox-container" class="postbox-container">
-                        <div class="meta-box-sortables ui-sortable" id="normal-sortables">
+                <div class="jpcfsm-left">
 
-                            <div class="postbox">
-                                <h3 class="hndle"><span><?php _e('Format Message', JPCFSM_DOMAIN); ?></span></h3>
-                                <div class="inside">
-                                    <p>
-                                        <em><?php _e('Format your message below', JPCFSM_DOMAIN); ?></em>
-                                    </p>
+                    <form method="post" id="poststuff" class="gc-settings">
+                        <div id="postbox-container" class="postbox-container">
+                            <div class="meta-box-sortables ui-sortable" id="normal-sortables">
 
-                                    <?php wp_editor($jpcfsm->settings('message'), 'message'); ?>
+                                <div class="postbox">
+                                    <h3 class="hndle"><span><?php _e('Format Message', JPCFSM_DOMAIN); ?></span></h3>
+                                    <div class="inside">
+                                        <p>
+                                            <em><?php _e('Format your message below', JPCFSM_DOMAIN); ?></em>
+                                        </p>
+
+                                        <?php wp_editor(jp_cf_success_message()->settings('message'), 'message'); ?>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="postbox">
-                                <h3 class="hndle"><span><?php _e('Other Settings', JPCFSM_DOMAIN); ?></span></h3>
-                                <div class="inside">
-                                    <p>
-                                        <label>
-                                            <input type="checkbox" name="strip_content" <?php checked($jpcfsm->settings('strip_content'), true); ?>/>
-                                            <?php _e('Display only this custom message upon form sent (this will exclude the post/page default content)', JPCFSM_DOMAIN); ?>
-                                        </label>
-                                    </p>
+                                <div class="postbox">
+                                    <h3 class="hndle"><span><?php _e('Other Settings', JPCFSM_DOMAIN); ?></span></h3>
+                                    <div class="inside">
+                                        <p>
+                                            <label>
+                                                <input type="checkbox" name="strip_content" <?php checked(jp_cf_success_message()->settings('strip_content'), true); ?>/>
+                                                <?php _e('Display only this custom message upon form sent (this will exclude the post/page default content)', JPCFSM_DOMAIN); ?>
+                                            </label>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="postbox">
-                                <h3 class="hndle"><?php _e('Save Changes', JPCFSM_DOMAIN); ?></h3>
-                                <div class="inside">
-                                    <p>
-                                        <?php wp_nonce_field('jpcfm_update', 'jpcfm_nonce'); ?>
-                                        <input type="submit" name="submit" class="button button-primary" value="<?php _e('Save Changes', JPCFSM_DOMAIN); ?>" />
-                                    </p>
+                                <div class="postbox">
+                                    <h3 class="hndle"><?php _e('Save Changes', JPCFSM_DOMAIN); ?></h3>
+                                    <div class="inside">
+                                        <p>
+                                            <?php wp_nonce_field('jpcfm_update', 'jpcfm_nonce'); ?>
+                                            <input type="submit" name="submit" class="button button-primary" value="<?php _e('Save Changes', JPCFSM_DOMAIN); ?>" />
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
-                    </div>
-                </form>
-
-            </div>
-
-            <div class="jpcfsm-right">
-                <div class="jcfsm_right">
-
-                    <h3><?php _e('Stay tuned to updates', JPCFSM_DOMAIN); ?></h3>
-                    <p><i><?php _e('Join our mailing list today for more free and premium WordPress plugins!', JPCFSM_DOMAIN); ?></i><p>
-                    <form action="//samelh.us12.list-manage.com/subscribe/post?u=677d27f6f70087b832c7d6b67&amp;id=7b65601974" method="post" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
-                        <label><strong><?php _e('Email:', JPCFSM_DOMAIN); ?></strong><br/>
-                            <input type="email" value="<?php echo $current_user->user_email; ?>" name="EMAIL" class="required email" id="mce-EMAIL" />
-                        </label>
-                        <br/>
-                        <label><strong><?php _e('Your name:', JPCFSM_DOMAIN); ?></strong><br/>
-                            <input type="text" value="<?php echo $current_user->user_nicename; ?>" name="FNAME" class="" id="mce-FNAME" />
-                        </label>
-                        <br/>
-                        <input type="submit" value="<?php esc_attr_e('Subscribe', JPCFSM_DOMAIN); ?>" name="subscribe" id="mc-embedded-subscribe" class="button" />
                     </form>
-                    <p><hr/></p>
-
-                    <h3><?php _e('Are you looking for help?', JPCFSM_DOMAIN); ?></h3>
-                    <p><?php _e('Don\'t worry, we got you covered:', JPCFSM_DOMAIN); ?></p>
-                    <li><a href="https://wordpress.org/support/plugin/jetpack-contact-form-success-message"><?php _e('Go to plugin support forums on WordPress', JPCFSM_DOMAIN); ?></a></li>
-                    <li><a href="http://blog.samelh.com/"><?php _e('Browse our blog for tutorials', JPCFSM_DOMAIN); ?></a></li>
-                    <p><hr/></p>
-
-                    <p>
-                        <li><a href="https://wordpress.org/support/view/plugin-reviews/jetpack-contact-form-success-message?rate=5#postform"><?php _e('Rate &amp; review this plugin? &#9733;&#9733;&#9733;&#9733;&#9733;', JPCFSM_DOMAIN); ?></a></li>
-                        <li><a href="https://twitter.com/samuel_elh"><?php _e('Follow @Samuel_Elh on Twitter', JPCFSM_DOMAIN); ?></a></li>
-                    </p>
 
                 </div>
+
+                <div class="jpcfsm-right">
+                    <div class="jcfsm_right">
+
+                        <h3><?php _e('Stay tuned to updates', JPCFSM_DOMAIN); ?></h3>
+                        <p><i><?php _e('Join our mailing list today for more free and premium WordPress plugins!', JPCFSM_DOMAIN); ?></i><p>
+                        <form action="//samelh.us12.list-manage.com/subscribe/post?u=677d27f6f70087b832c7d6b67&amp;id=7b65601974" method="post" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+                            <label><strong><?php _e('Email:', JPCFSM_DOMAIN); ?></strong><br/>
+                                <input type="email" value="<?php echo $current_user->user_email; ?>" name="EMAIL" class="required email" id="mce-EMAIL" />
+                            </label>
+                            <br/>
+                            <label><strong><?php _e('Your name:', JPCFSM_DOMAIN); ?></strong><br/>
+                                <input type="text" value="<?php echo $current_user->user_nicename; ?>" name="FNAME" class="" id="mce-FNAME" />
+                            </label>
+                            <br/>
+                            <input type="submit" value="<?php esc_attr_e('Subscribe', JPCFSM_DOMAIN); ?>" name="subscribe" id="mc-embedded-subscribe" class="button" />
+                        </form>
+                        <p><hr/></p>
+
+                        <h3><?php _e('Are you looking for help?', JPCFSM_DOMAIN); ?></h3>
+                        <p><?php _e('Don\'t worry, we got you covered:', JPCFSM_DOMAIN); ?></p>
+                        <li><a href="https://wordpress.org/support/plugin/jetpack-contact-form-success-message"><?php _e('Go to plugin support forums on WordPress', JPCFSM_DOMAIN); ?></a></li>
+                        <li><a href="http://blog.samelh.com/"><?php _e('Browse our blog for tutorials', JPCFSM_DOMAIN); ?></a></li>
+                        <p><hr/></p>
+
+                        <p>
+                            <li><a href="https://wordpress.org/support/view/plugin-reviews/jetpack-contact-form-success-message?rate=5#postform"><?php _e('Rate &amp; review this plugin? &#9733;&#9733;&#9733;&#9733;&#9733;', JPCFSM_DOMAIN); ?></a></li>
+                            <li><a href="https://twitter.com/samuel_elh"><?php _e('Follow @Samuel_Elh on Twitter', JPCFSM_DOMAIN); ?></a></li>
+                            <li><a href="https://samelh.com/work-with-me/"><?php _e('Hire me for custom work', JPCFSM_DOMAIN); ?></a></li>
+                        </p>
+
+                    </div>
+                </div>
+
             </div>
 
         </div>
 
         <?php
+    }
+
+    public function actionLinks($l)
+    {
+        return array_merge(array(
+            'settings' => '<a href="' . (
+                $this->isNetworkActive() ? 'settings.php' : 'options-general.php'
+            ) . '?page=jpcfsm">' . __('Settings', JPCFSM_DOMAIN) . '</a>'
+        ), $l);
+    }
+
+    public function scripts()
+    {
+        wp_register_style('jpcfsm', plugin_dir_url(JPCFSM_FILE) . 'assets/css/admin.css');
     }
 }

@@ -4,7 +4,7 @@ Plugin Name: JetPack Contact Form Success Message
 Plugin URI: https://wordpress.org/plugins/jetpack-contact-form-success-message/
 Description: JetPack Contact Form Success Message replaces the custom message showing after successfully submitting a contact form, with your custom message.
 Author: Samuel Elh
-Version: 0.4
+Version: 0.4.1
 Author URI: https://samelh.com
 Text Domain: jpcfsm
 Donate link: https://go.samelh.com/buy-me-a-coffee
@@ -20,7 +20,7 @@ if ( !defined('JPCFSM_FILE') ) {
 }
 
 if ( !defined('JPCFSM_VERSION') ) {
-    define('JPCFSM_VERSION', '0.4');
+    define('JPCFSM_VERSION', '0.4.1');
 }
 
 register_activation_hook(JPCFSM_FILE, 'jp_cf_success_message_upgrade');
